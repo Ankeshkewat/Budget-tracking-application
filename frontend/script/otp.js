@@ -17,8 +17,7 @@ async function OTPFUN(){
        alert(otp_stream.msg)
        if(otp_stream.msg=='Account Created Successfully'){
         localStorage.setItem('token',otp_stream.token)
-        localStorage.setItem('refreshtoken',otp_stream.refreshtoken)
-
+        localStorage.setItem('name',otp_stream.name)
        window.location.href='index.html'
        }
    }
