@@ -68,7 +68,7 @@ UserRouter.post('/signup', async (req, res) => {
                     } else {
                        
                         console.log('Email Sent Successfully');
-                        res.status(201).send({ "msg": `Otp Sent Successfully to ${email}`,"email":email})
+                        res.status(201).send({ "msg": `Otp Sent Successfully`,"email":email})
                     
                     }
                     //console.log(info);
@@ -89,14 +89,16 @@ UserRouter.post('/verify',async (req,res)=>{
          if(!otp){
             return res.status(401).send({"msg":"Please enter otp"})
          }
-         let data=await OtpModel.find({otp});
-         if(data.length>0){
+         let data2=await OtpModel.findOne({otp});
+         if(data2&&data2.otp){
            try{
             const {email}=req.body;
             let data= await UserModel.findOne({email});
-            const token = jwt.sign({ id: data._id}, process.env.secret, { expiresIn: '5 days' })
+            const token = jwt.sign({ id: data._id,first_name:data.first_name}, process.env.secret, { expiresIn: '5 days' })
             redis.set('token',token)
-            res.status(201).send({"msg":"Account Created Successfully","token":token})
+            console.log(token)
+            await OtpModel.findByIdAndDelete(data2._id)
+            res.status(201).send({"msg":"Account Created Successfully","token":token,"name":data.first_name})
            }catch(er){
             console.log(er);
             res.status(500).send({"msg":"Something went wrong"})

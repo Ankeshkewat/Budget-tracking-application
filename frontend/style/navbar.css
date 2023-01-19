@@ -13,10 +13,11 @@
     align-items: center;
     justify-content: space-around;
     border: 2px solid red;
+    height: 70px;
   }
   nav img{
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
   }
   nav .mainMenu {

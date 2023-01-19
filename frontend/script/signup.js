@@ -5,11 +5,24 @@ signUp.onclick=()=>{
     createAccout()
 }
 let otp;
+
+let loader = () => {
+    if (document.querySelector('.spinner').style.visibility == 'visible') {
+        document.querySelector('.spinner').style.visibility = 'hidden'
+    } else {
+        document.querySelector('.spinner').style.visibility = 'visible'
+    }
+}
+
+
 async function createAccout(){
-    let email=document.getElementById('email').value
+    //loder start running
+    loader()
+    let email=document.getElementById('email').value;
+    let first_name=document.getElementById('first_name').value;
+    let last_name=document.getElementById('last_name').value ;
     let password=document.getElementById('password').value
-    let role=document.getElementById('role').value
-    let form={email,password,role};
+    let form={email,password,first_name,last_name};
     let res=await fetch('http://localhost:1000/signup',{
         method:'POST',
         body:JSON.stringify(form),
@@ -19,6 +32,20 @@ async function createAccout(){
     })
     let data=await res.json();
     console.log(data)
+
+    if (data.msg == 'Account has been already created') {
+        Swal.fire({
+            title: 'User Already Exist!!',
+            text: "Try with diffrent Email Id!",
+            icon: 'warning',
+            showCancelButton: false,
+            background: '#202030',
+            confirmButtonColor: '#C6604C',
+            cancelButtonColor: "#AAAAAA",
+            // confirmButtonText: 'Yes, add this hotel!'
+        })
+
+    }
     
     if(data.msg=='Otp Sent Successfully'){
         alert(data.msg)

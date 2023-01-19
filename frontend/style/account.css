@@ -1,6 +1,6 @@
 #form{
     margin-top: 30px;
-    width: 30%;
+    width: 400px;
     margin: auto;
     text-align: center;
     border: 1px solid red;
@@ -28,4 +28,13 @@ margin-top: 20px;
 #p{
     text-align: left;
     border: 1px solid;
+}
+#name{
+    display:flex;
+    gap: 10px;
+}
+@media (max-width: 500px){
+    #form{
+        width: 98%;
+    }
 }
