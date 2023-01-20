@@ -53,6 +53,9 @@
     cursor: pointer;
     text-transform: uppercase;
   }
+  #home_logo{
+    list-style: none;
+  }
   @media (max-width: 800px) {
     nav .mainMenu {
       height: 100vh;

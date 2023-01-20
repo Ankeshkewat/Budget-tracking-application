@@ -6,10 +6,11 @@
     <title>Home Page</title>
     <link rel="stylesheet" href="./style/navbar.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" integrity="sha256-46r060N2LrChLLb5zowXQ72/iKKNiw/lAmygmHExk/o=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="./style/index.css">
 </head>
 <body>
         <nav>
-          <li><a href="index.html"><img src="./images/Your paragraph text.png" alt="Home"></a></li>
+          <li id="home_logo"><a href="index.html"><img src="./images/Your paragraph text.png" alt="Home"></a></li>
             <div class="openMenu"><i class="fa fa-bars"></i></div>
             <ul class="mainMenu">
                 <li><a href="index.html">Home</a></li>
@@ -22,9 +23,26 @@
             </ul>
         </nav>
 
-        <header>
-          
-        </header>
+  
+        <main>
+          <div id="balance_div">
+            <div>
+            <p>Balance</p>
+            </div>
+          <div><p>Cash</p> <p id="cash_plus">0.00</p></div>
+
+          </div>
+        </main>
+     
+      <section>
+
+        <h3>Expenses structure</h3>
+        <p>Last 3 Days</p>
+        <h1 id=""></h1>
+
+      </section>
+
+
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="sweetalert2.all.min.js"></script>
 
