@@ -1,0 +1,22 @@
+main,section{
+    margin: auto;
+    border: 2px solid red;
+    width: 40%;
+}
+#balance_div{
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: repeat(2,1fr);
+
+}
+#balance_div div:nth-child(2){
+    background-color: blue;
+    color:white;
+    padding: 5px;
+}
+
+#balance_div div:nth-child(1){
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
