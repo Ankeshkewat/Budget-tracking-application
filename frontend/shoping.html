@@ -7,10 +7,58 @@
     <link rel="stylesheet" href="./style/navbar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" integrity="sha256-46r060N2LrChLLb5zowXQ72/iKKNiw/lAmygmHExk/o=" crossorigin="anonymous" />
     <title>Shopping Lists</title>
+    <link rel="stylesheet" href="./style/shopping.css">
 </head>
 <body>
     <nav>
-
+        <li id="home_logo"><a href="index.html"><img src="./images/Your paragraph text.png" alt="Home"></a></li>
+        <div class="openMenu"><i class="fa fa-bars"></i></div>
+        <ul class="mainMenu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">Records</a></li>
+            <li><a href="#">Statistics</a></li>
+            <li><a href="#">Shopping list</a></li>
+            <li><a href="#">Warranties</a></li>
+            <li><a href="signUp.html">Profile</a></li>
+            <div class="closeMenu"><i class="fa fa-times"></i></div>
+        </ul>
     </nav>
+    
+
+    <section>
+        <div id="head"> 
+            <h1>Name your list</h1>
+            <p>Give a unique name to your shoping list</p>
+          <div id="name_div">
+               <input type="text" name="" id="list_name" placeholder="Name your list">
+
+          </div>
+          <div id="list_div">
+              <div class="list">
+                <input type="text" name="" id="item_name" placeholder="Item name">
+                <input type="number" name="" id="item_quan" placeholder="Quantity">
+                <input type="number" name="" id="item_price" placeholder="Price 1 piece">
+              </div>
+                <!-- append more row -->
+
+          </div>
+          <div id="but">
+            <button id="add">Add more item+</button>
+          </div>
+        <button id="create_recodes">Create Records</button>
+        </div>
+    </section>
+
+    <!-- //all lists -->
+
+      <section>
+        <div id="all">
+              <h3>All shoping list</h3>
+              <!-- append all list here -->
+        </div>
+      </section>
 </body>
 </html>
+<script src="./script/shopping.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="sweetalert2.all.min.js"></script>

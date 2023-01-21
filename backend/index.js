@@ -13,6 +13,9 @@ app.use(cors({
 
 const { connection } = require('./config/db')
 const { UserRouter } = require('./routes/user.router')
+const {ShoppingRouter}=require('./routes/shopping.router')
+
+const {authanticate}=require('./middlewares/athanticate')
 
 
 app.get('/', UserRouter)
@@ -20,6 +23,8 @@ app.post('/signup', UserRouter)
 app.post('/login', UserRouter)
 app.post('/verify', UserRouter)
 app.get('/logout', UserRouter)
+app.post('/shopping',authanticate,ShoppingRouter)
+app.get('/shopping',authanticate,ShoppingRouter)
 
 app.get('/oauth/google', (req, res) => {
     res.send("sending email")

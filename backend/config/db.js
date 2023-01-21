@@ -1,5 +1,5 @@
 const mongoose=require('mongoose');
 
-const connection=mongoose.connect('mongodb+srv://ankesh:ankeshkewat@cluster0.bdtrrli.mongodb.net/Budget?retryWrites=true&w=majority')
+const connection=mongoose.connect('mongodb://localhost:27017/pro')
 
 module.exports={connection}

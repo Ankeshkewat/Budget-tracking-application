@@ -20,3 +20,14 @@ main,section{
     align-items: center;
     justify-content: center;
 }
+
+#exp_str{
+    height: 200px;
+}
+#circle{
+    height: 30px;
+    border: 2px solid blue;
+}
+#last_recodes{
+    height: 200px;
+}
