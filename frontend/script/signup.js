@@ -1,3 +1,5 @@
+import { navbar } from "../component/navbar.js";
+document.querySelector('nav').innerHTML=navbar()
 
 
 let signUp=document.getElementById('createAcc');

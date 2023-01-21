@@ -1,3 +1,7 @@
+import { navbar } from "../component/navbar.js";
+document.querySelector('nav').innerHTML=navbar()
+
+
 
 window.onload = () => {
     document.getElementById('logo').onclick = () => {
