@@ -1,0 +1,59 @@
+#head{
+    width: 40%;
+    border: 2px solid blue;
+    margin: auto;
+    line-height: 30px;
+    text-align: center;
+}
+
+#name_div input{
+    width: 100%;
+    border-style: double;
+    padding: 10px;
+}
+
+#name_div input::placeholder{
+    font-size: larger;
+}
+.list{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    margin-top: 10px;
+    gap: 5px;
+}
+.list input{
+    width: 100%;
+}
+#but{
+    text-align: right;
+}
+#add{
+    border:0px;
+    /* background-color: blue; */
+    color: blue;
+
+}
+#create_recodes{
+    padding: 5px;
+    /* background-color: blue; */
+    color: blue;
+    border: 0;
+}
+#create_recodes:hover,
+#add:hover
+{
+    color: green;
+}
+#all{
+    width: 40%;
+    margin: auto;
+    margin-top: 30px;
+}
+.lists_con{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 30px;
+}
