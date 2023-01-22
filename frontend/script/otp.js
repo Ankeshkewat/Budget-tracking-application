@@ -1,5 +1,3 @@
-import { navbar } from "../component/navbar.js";
-document.querySelector('nav').innerHTML=navbar()
 
 // let otp= window.prompt('Please enter 4 digits otp');
 document.getElementById('Check').onclick=()=>{

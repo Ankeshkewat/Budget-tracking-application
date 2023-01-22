@@ -9,12 +9,23 @@
   <link rel="stylesheet" href="style/account.css">
   <link rel="stylesheet" href="style/loader.css">
   <link rel="stylesheet" href="./style/navbar.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" integrity="sha256-46r060N2LrChLLb5zowXQ72/iKKNiw/lAmygmHExk/o=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css"
+    integrity="sha256-46r060N2LrChLLb5zowXQ72/iKKNiw/lAmygmHExk/o=" crossorigin="anonymous" />
 </head>
 
 <body>
   <nav>
-    <!-- append navbar here -->
+    <li id="home_logo"><a href="index.html"><img src="./images/Your paragraph text.png" alt="Home"></a></li>
+    <div class="openMenu"><i class="fa fa-bars"></i></div>
+    <ul class="mainMenu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#">Records</a></li>
+      <!-- <li><a href="#">Statistics</a></li> -->
+      <li><a href="shoping.html">Shopping list</a></li>
+      <li><a href="#">Warranties</a></li>
+      <li><a href="signUp.html" id="profile">Profile</a></li>
+      <div class="closeMenu"><i class="fa fa-times"></i></div>
+    </ul>
   </nav>
   <div id="form">
     <h2>Create Account</h2>
@@ -32,7 +43,7 @@
           alt="github"> </a>
     </div>
     <button id="createAcc">SignUp</button>
-    <p>Already have a account <a href="login.html">login</a></p>
+    <p id="already">Already have a account <a href="login.html">login</a></p>
     <span class="spinner spinner-large"></span>
   </div>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -40,5 +51,5 @@
 </body>
 
 </html>
-<script src="./script/signup.js" type="module"></script>
+<script src="./script/signup.js"></script>
 <script src="./script/navbar.js"> </script>

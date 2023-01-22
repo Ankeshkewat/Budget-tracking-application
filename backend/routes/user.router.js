@@ -18,6 +18,7 @@ const UserRouter = express.Router()
 const { authanticate } = require('../middlewares/athanticate')
 const { UserModel } = require('../models/user.model')
 const { OtpModel } = require('../models/otp.model')
+const {CashModel}=require('../models/cash.modle')
 
 UserRouter.use(cookieParser())
 
@@ -94,6 +95,8 @@ UserRouter.post('/verify',async (req,res)=>{
            try{
             const {email}=req.body;
             let data= await UserModel.findOne({email});
+            let new_cash=new CashModel({user_id:data._id,cash:0});
+            await new_cash.save()
             const token = jwt.sign({ id: data._id,first_name:data.first_name}, process.env.secret, { expiresIn: '5 days' })
             redis.set('token',token)
             console.log(token)
@@ -147,10 +150,10 @@ UserRouter.post('/login', async (req, res) => {
 })
 
 //logout
-UserRouter.get('/logout',authanticate, async (req, res) => {
+UserRouter.get('/logout', async (req, res) => {
     // const token = req.headers?.authorization?.split(' ')[1] || req.cookies.token
-    const token = req.body.token
+    const token = req.headers.token
    redis.set('blacklist',token)
-    res.send({ "msg": "User logout succesfully" })
+    res.send({ "msg": "Logout succesfully" })
 })
 module.exports = { UserRouter,redis }
