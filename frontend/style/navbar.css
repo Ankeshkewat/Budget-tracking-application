@@ -7,17 +7,18 @@
     font-family: Arial, sans-serif;
   }
   nav {
-    background: rgb(168, 181, 93);
+    /* background: rgb(168, 181, 93); */
+    background: #00253c;
     color: rgb(255, 255, 255);
     display: flex;
     align-items: center;
     justify-content: space-around;
-    border: 2px solid red;
-    height: 70px;
+    /* border: 2px solid red; */
+    height: 60px;
   }
   nav img{
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
   }
   nav .mainMenu {
@@ -34,7 +35,10 @@
     transition: 0.2s ease;
   }
   nav .mainMenu li a:hover {
-    background: rgb(0, 255, 251);
+    background: none;
+    color: rgb(255, 123, 0);
+    transition: 0.5s ease;
+
   }
   nav .openMenu {
     font-size: 2rem;
@@ -67,8 +71,10 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      background: rgb(168, 181, 93);
-      transition: top 1s ease 0s;
+      background: #00253c;
+      /* background: rgb(168, 181, 93); */
+
+      transition: top 0.7s ease 0s;
       display: none;
     }
     nav .mainMenu .closeMenu {
@@ -83,6 +89,8 @@
     nav .mainMenu li a:hover {
       background: none;
       color: rgb(255, 123, 0);
+     transition: 0.1s ease;
+
     }
     .icons i {
       display: inline-block;

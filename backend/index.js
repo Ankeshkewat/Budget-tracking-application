@@ -22,9 +22,12 @@ app.get('/', UserRouter)
 app.post('/signup', UserRouter)
 app.post('/login', UserRouter)
 app.post('/verify', UserRouter)
-app.get('/logout', UserRouter)
+app.get('/logout',authanticate, UserRouter)
 app.post('/shopping',authanticate,ShoppingRouter)
 app.get('/shopping',authanticate,ShoppingRouter)
+app.get('/shopping/cat',authanticate,ShoppingRouter)
+app.patch('/update',authanticate,ShoppingRouter)
+app.get('/get/cash',authanticate,ShoppingRouter)
 
 app.get('/oauth/google', (req, res) => {
     res.send("sending email")

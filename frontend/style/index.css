@@ -1,18 +1,25 @@
 main,section{
     margin: auto;
-    border: 2px solid red;
+    border: 1px solid ;
     width: 40%;
+
+}
+main{
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 5px;
+
 }
 #balance_div{
     display: grid;
     justify-content: space-between;
     grid-template-columns: repeat(2,1fr);
-
 }
 #balance_div div:nth-child(2){
-    background-color: blue;
+    background-color: rgb(99, 99, 192);
     color:white;
     padding: 5px;
+    align-items: center;
+    text-align: center;
 }
 
 #balance_div div:nth-child(1){
@@ -22,12 +29,56 @@ main,section{
 }
 
 #exp_str{
-    height: 200px;
+    /* height: 200px; */
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    margin-top: 10px;
+    padding: 10px;
+
+
 }
-#circle{
-    height: 30px;
+/* #circle{
     border: 2px solid blue;
-}
+} */
 #last_recodes{
-    height: 200px;
+   
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    margin-top: 10px;
+    padding: 10px;
+
+
+}
+.lists_con{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 8px;
+}
+.money_minus{
+    color: red;
+}
+#add_cash{
+    text-align: right;
+    display: none;
+}
+#cash{
+    height: 25px;
+    width: 30%;
+}
+#add{
+color:blue;
+    border: none;
+    font-size: 15px;
+    height: 25px;
+
+}
+#add_cash_btn{
+    text-align: right;
+}
+#add_cash_btn button{
+    color:blue;
+    border: none;
+    font-size: 15px;
+    height: 25px;
 }

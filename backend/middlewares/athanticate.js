@@ -55,7 +55,7 @@ const authanticate = (req, res, next) => {
                if(blacklist==result){
                return  res.status(401).send({"msg":"PLease login again"})
                }
-               req.body.token=result
+               req.headers.token=result
                jwt.verify(result, process.env.secret, async function (err, decoded) {
                   if (err) {
                      console.log(err.message);

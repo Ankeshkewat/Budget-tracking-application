@@ -23,3 +23,35 @@ function show(){
 function close(){
     mainMenu.style.top = '-100%';
 }
+
+
+let token=localStorage.getItem('token')
+let name=JSON.parse( localStorage.getItem('first_name'));
+// console.log(token,name)
+if(token){
+    document.getElementById('profile').innerText=name
+    let logout=document.createElement('a');
+    logout.innerText='Logout'
+    logout.setAttribute('href','#')
+    logout.setAttribute('id','logout')
+
+    let li=document.createElement('li')
+    li.append(logout)
+    document.querySelector('.mainMenu').append(li)
+}
+
+document.getElementById('logout').onclick=()=>{
+    logout()
+}
+
+async function logout(){
+    let res=await fetch('http://localhost:1000/logout');
+    let data=await res.json();
+    alert(data.msg)
+   if(data.msg=='Logout succesfully'){
+    localStorage.removeItem('token')
+    location.reload()
+   }
+
+
+}

@@ -1,6 +1,6 @@
 #head{
     width: 40%;
-    border: 2px solid blue;
+    border: 1px solid ;
     margin: auto;
     line-height: 30px;
     text-align: center;
@@ -8,7 +8,6 @@
 
 #name_div input{
     width: 100%;
-    border-style: double;
     padding: 10px;
 }
 
@@ -21,8 +20,11 @@
     margin-top: 10px;
     gap: 5px;
 }
-.list input{
+.list input,select{
     width: 100%;
+}
+#list_div input,select{
+    padding: 5px;
 }
 #but{
     text-align: right;
@@ -35,6 +37,7 @@
 }
 #create_recodes{
     padding: 5px;
+    margin-top: 5px;
     /* background-color: blue; */
     color: blue;
     border: 0;
@@ -56,4 +59,7 @@
     gap: 30px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     padding: 30px;
+}
+#cat{
+    margin-top: 10px;
 }

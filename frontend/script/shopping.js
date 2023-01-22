@@ -47,6 +47,8 @@ function addMoreRow(){
 function addData(){
     let title=document.getElementById('list_name').value;
 
+    let cat=document.getElementById('cat').value
+
     let name=document.getElementById('item_name').value;
     document.getElementById('item_name').removeAttribute('id');
 
@@ -56,23 +58,34 @@ function addData(){
     let price=document.getElementById('item_price').value;
     document.getElementById('item_price').removeAttribute('id');
    
+    // let obj={
+    //     list_name:title,
+    //     list:[
+    //         {"name":name,"quan":quan,"price":price,"total":quan*price}
+    //     ]
+    // }
+
     let obj={
-        list_name:title,
-        list:[
-            {"name":name,"quan":quan,"price":price,"total":quan*price}
-        ]
+        "title":title,
+        "list":name,
+        "total":quan*price,
+        "cat":cat
     }
+
    if(!title||!name||!quan||!price){
    
     return alert('Please fill all field')
    }else{
-    if(shopping_list.length==0){
-        shopping_list.push(obj)
-    }else{
-        shopping_list[0].list.push(
-            {"name":name,"quan":quan,"price":price,"total":quan*price}
-        )
-    }
+
+    // if(shopping_list.length==0){
+    //     shopping_list.push(obj)
+    // }else{
+    //     shopping_list[0].list.push(
+    //         {"name":name,"quan":quan,"price":price,"total":quan*price}
+    //     )
+    // }
+    shopping_list.push(obj)
+
    }
     console.log(shopping_list)
 }
@@ -88,12 +101,15 @@ async function postData(){
         method:"POST",
         body:JSON.stringify(shopping_list),
         headers:{
-            'Content-Type':"application/json"
+            'Content-Type':"application/json",
+            'list':`${document.getElementById('list_name').value}`
         }
      })
      let data=await res.json();
      alert(data.msg)
-     location.reload();
+     if(data.msg=='List created succesfully'){
+        location.reload();
+     }
 }
 
 async function getList(){
@@ -104,6 +120,7 @@ async function getList(){
         }
      })
      let {msg}=await res.json();
+     console.log(msg)
 
      msg.forEach((el)=>{
         let div=document.createElement('div');
@@ -113,10 +130,10 @@ async function getList(){
         div1.className='lists1'
 
         let title=document.createElement('h4');
-        title.innerText=el.list_name[0].list_name
+        title.innerText=el._id
 
         let length=document.createElement('p');
-        length.innerText=el.list_name[0].list.length+" items"
+        length.innerText=el.count+" items"
 
         div1.append(title,length)
  
@@ -124,7 +141,7 @@ async function getList(){
         div2.className='lists2'
         
         let total=document.createElement('h4');
-        total.innerText=0.00
+        total.innerText= `₹`+el.total+".00"
         let p=document.createElement('p');
         p.innerText="Estimated"
 

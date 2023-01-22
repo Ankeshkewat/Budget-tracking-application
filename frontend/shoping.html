@@ -11,17 +11,17 @@
 </head>
 <body>
     <nav>
-        <li id="home_logo"><a href="index.html"><img src="./images/Your paragraph text.png" alt="Home"></a></li>
-        <div class="openMenu"><i class="fa fa-bars"></i></div>
-        <ul class="mainMenu">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="#">Records</a></li>
-            <li><a href="#">Statistics</a></li>
-            <li><a href="#">Shopping list</a></li>
-            <li><a href="#">Warranties</a></li>
-            <li><a href="signUp.html">Profile</a></li>
-            <div class="closeMenu"><i class="fa fa-times"></i></div>
-        </ul>
+      <li id="home_logo"><a href="index.html"><img src="./images/Your paragraph text.png" alt="Home"></a></li>
+      <div class="openMenu"><i class="fa fa-bars"></i></div>
+      <ul class="mainMenu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#">Records</a></li>
+          <!-- <li><a href="#">Statistics</a></li> -->
+          <li><a href="shoping.html">Shopping list</a></li>
+          <li><a href="#">Warranties</a></li>
+          <li><a href="signUp.html" id="profile">Profile</a></li>
+          <div class="closeMenu"><i class="fa fa-times"></i></div>
+      </ul>
     </nav>
     
 
@@ -33,6 +33,15 @@
                <input type="text" name="" id="list_name" placeholder="Name your list">
 
           </div>
+          <select name="" id="cat">
+            <option value="">Select category</option>
+            <option value="Groceries">Groceries</option>
+            <option value="Food and Drinks">Food and Drinks</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Investment">Investment</option>
+            <option value="Other">Other</option>
+          </select>
+          <br>
           <div id="list_div">
               <div class="list">
                 <input type="text" name="" id="item_name" placeholder="Item name">
@@ -43,8 +52,9 @@
 
           </div>
           <div id="but">
-            <button id="add">Add more item+</button>
+            <button id="add">Add item+</button>
           </div>
+         
         <button id="create_recodes">Create Records</button>
         </div>
     </section>
@@ -62,3 +72,4 @@
 <script src="./script/shopping.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="sweetalert2.all.min.js"></script>
+<script src="./script/navbar.js"></script>
