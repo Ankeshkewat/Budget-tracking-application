@@ -40,7 +40,6 @@ const redis = new Redis({
 
 
 
-// using redis now i am geting token
 const authanticate = (req, res, next) => {
    redis.get('blacklist',(err,blacklist)=>{
       if(err){
@@ -75,6 +74,37 @@ const authanticate = (req, res, next) => {
 }
 
 
+const authanticate_login = (req, res, next) => {
+   redis.get('blacklist',(err,blacklist)=>{
+      if(err){
+         console.log(err);
+         res.send({'msg':"Something went wrong"})
+      }else{
+         redis.get('token', (err, result) => {
+            if (err) {
+               console.log(err)
+               res.status(401).send({ "msg": "You are not authorized" })
+            } else {
+               req.headers.token=result
+               jwt.verify(result, process.env.secret, async function (err, decoded) {
+                  if (err) {
+                     console.log(err.message);
+                     res.status(401).send({ 'msg': 'Session expired' })
+                  }
+                  else if (decoded) {
+                     // console.log(decoded)
+                     next()
+                  }
+               })
+            }
+         })
+      
+      }
+   })
+  
+}
 
 
-module.exports = { authanticate }
+
+
+module.exports = { authanticate ,authanticate_login}

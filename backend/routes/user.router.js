@@ -23,7 +23,6 @@ const {CashModel}=require('../models/cash.modle')
 UserRouter.use(cookieParser())
 
 UserRouter.get('/', (req, res) => {
-    res.cookie('nxm201', 'Firstcookie')
     res.status(201).send({ "msg": "Hello from router" })
 })
 
@@ -33,6 +32,7 @@ UserRouter.post('/signup', async (req, res) => {
    // console.log(email, password ,role)
     bcrypt.hash(password, 6, async function (err, hash) {
         if (err) {
+            console.log('ERR: Error from bcrypt')
             res.status(500).send({ 'msg': "Something went wrong" })
         }
         else {
@@ -64,6 +64,8 @@ UserRouter.post('/signup', async (req, res) => {
 
                 transporter.sendMail(mailConfigurations, async function (error, info) {
                     if (error) {
+                       console.log('ERR: Error from nodemailer')
+
                         console.log(error)
                         res.status(500).send({"msg":"Something went wrong"})
                     } else {
@@ -94,7 +96,9 @@ UserRouter.post('/verify',async (req,res)=>{
          if(data2&&data2.otp){
            try{
             const {email}=req.body;
+            console.log(email)
             let data= await UserModel.findOne({email});
+            console.log(data)
             let new_cash=new CashModel({user_id:data._id,cash:0});
             await new_cash.save()
             const token = jwt.sign({ id: data._id,first_name:data.first_name}, process.env.secret, { expiresIn: '5 days' })
@@ -129,9 +133,10 @@ UserRouter.post('/login', async (req, res) => {
                     res.status(500).send({ 'msg': "Something went wrong" })
                 }
                 else if (result) {
-                    let token = jwt.sign({ id: user._id }, process.env.secret, { expiresIn: '4 days' })
-                    res.cookie('token', token, { httpOnly: true })
-                    res.status(200).send({ "msg": "login successfull", token, })
+                    const token = jwt.sign({ id: user._id,first_name:user.first_name}, process.env.secret, { expiresIn: '5 days' })
+                    // res.cookie('token', token, { httpOnly: true })
+                    redis.set('token',token)
+                    res.status(201).send({"msg":"Login succesfull","token":token,"name":user.first_name})
                 }
                 else {
                     res.send({ 'msg': "incorrect password" })
