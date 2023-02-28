@@ -9,6 +9,10 @@ main{
     padding: 5px;
 
 }
+#cash_minus{
+    color: red;
+    font-size: medium;
+}
 #balance_div{
     display: grid;
     justify-content: space-between;

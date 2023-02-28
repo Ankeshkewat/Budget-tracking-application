@@ -26,9 +26,9 @@ function close(){
 
 
 let token=localStorage.getItem('token')
-let name=JSON.parse( localStorage.getItem('first_name'));
+let name=localStorage.getItem('name');
 // console.log(token,name)
-if(token){
+if(token&&name){
     document.getElementById('profile').innerText=name
     let logout=document.createElement('a');
     logout.innerText='Logout'
@@ -45,13 +45,11 @@ document.getElementById('logout').onclick=()=>{
 }
 
 async function logout(){
-    let res=await fetch('http://localhost:1000/logout');
-    let data=await res.json();
-    alert(data.msg)
-   if(data.msg=='Logout succesfully'){
+   
     localStorage.removeItem('token')
+    localStorage.removeItem('name')
     location.reload()
-   }
+
 
 
 }

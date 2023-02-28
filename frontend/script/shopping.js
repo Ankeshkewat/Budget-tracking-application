@@ -97,12 +97,13 @@ async function postData(){
         return alert("Please all fields")
     }
 
-     const res=await fetch('http://localhost:1000/shopping',{
+     const res=await fetch('http://localhost:1600/shopping',{
         method:"POST",
         body:JSON.stringify(shopping_list),
         headers:{
             'Content-Type':"application/json",
-            'list':`${document.getElementById('list_name').value}`
+            'list':`${document.getElementById('list_name').value}`,
+            'token':localStorage.getItem('token')
         }
      })
      let data=await res.json();
@@ -113,10 +114,12 @@ async function postData(){
 }
 
 async function getList(){
-    const res=await fetch('http://localhost:1000/shopping',{
+    const res=await fetch('http://localhost:1600/shopping',{
         method:"GET",
         headers:{
-            'Content-Type':"application/json"
+            'Content-Type':"application/json",
+            'token':localStorage.getItem('token')
+
         }
      })
      let {msg}=await res.json();

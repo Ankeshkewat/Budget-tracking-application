@@ -6,19 +6,22 @@ window.onload=()=>{
     getList()
 }
 
+
 document.getElementById('add').onclick=()=>{
     update_cash()
  }
 
-async function getDataCat(){
-    const res=await fetch('http://localhost:1000/shopping/cat',{
+ async function getDataCat(){
+    const res=await fetch(`http://localhost:1600/shopping/cat`,{
         method:"GET",
         headers:{
-            'Content-Type':"application/json"
+            'Content-Type':"application/json",
+            "token":localStorage.getItem('token')
         }
      })
      let {msg}=await res.json();
      console.log(msg)
+     let count=0
      msg.forEach((el)=>{
         let div=document.createElement('div');
         div.className='lists_con'
@@ -27,18 +30,18 @@ async function getDataCat(){
         title.innerText=el._id
         let total=document.createElement('h4')
         total.innerText='-₹'+el.total+'.00'
+        count+=(+el.total)
         total.className='money_minus'
 
         div.append(title,total)
        
         document.getElementById('circle').append(div)
-
      })
+    document.getElementById('cash_minus').innerText="₹"+count+".00"
 
 }
 
 document.querySelector('#add_cash_btn button').onclick=()=>{
-    console.log("YEs")
     document.getElementById('add_cash').style.display='block'
     document.querySelector('#add_cash_btn button').style.display='none'
 }
@@ -48,10 +51,11 @@ document.querySelector('#add_cash_btn button').onclick=()=>{
 async function update_cash(){
     let value=document.getElementById('cash').value;
     let form={cash:value}
-    let res=await fetch('http://localhost:1000/update',{
+    let res=await fetch('http://localhost:1600/update',{
         method:"PATCH",
         body:JSON.stringify(form),
         headers:{
+            "token":localStorage.getItem('token'),
             'Content-type':'application/json'
         }
     });
@@ -62,19 +66,28 @@ async function update_cash(){
 }
 
 async function getCash(){
-    let res=await fetch('http://localhost:1000/get/cash');
+    let res=await fetch('http://localhost:1600/get/cash',{
+        headers:{
+            "token":localStorage.getItem('token'),
+        }
+    });
     let {msg}=await res.json();
     console.log(msg)
-    document.getElementById('cash_plus').innerText='₹'+msg.cash+'.00'
+    if(msg=='PLease login again'|| msg=='Something went wrong'){
+    document.getElementById('cash_plus').innerText='₹'+0+'.00'
+
+    }else{
+        document.getElementById('cash_plus').innerText='₹'+msg.cash+'.00'
+    }
 }
 
 
 
 async function getList(){
-    const res=await fetch('http://localhost:1000/shopping',{
+    const res=await fetch('http://localhost:1600/shopping',{
         method:"GET",
         headers:{
-            'Content-Type':"application/json"
+            "token":localStorage.getItem('token'),
         }
      })
      let {msg}=await res.json();

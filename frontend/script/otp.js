@@ -5,11 +5,10 @@ document.getElementById('Check').onclick=()=>{
 }
 async function OTPFUN(){
     let otp=document.getElementById('otp').value;
-    let email=localStorage.getItem('email')||null
-    let form={otp,email}
+    let form={otp}
 
        
-       let otp_res=await fetch('http://localhost:1000/verify',{
+       let otp_res=await fetch('http://localhost:1600/verify',{
          method:"POST",
          body:JSON.stringify(form),
          headers:{

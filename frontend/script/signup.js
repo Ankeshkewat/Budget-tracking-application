@@ -25,7 +25,7 @@ async function createAccout(){
     let last_name=document.getElementById('last_name').value ;
     let password=document.getElementById('password').value
     let form={email,password,first_name,last_name};
-    let res=await fetch('http://localhost:1000/signup',{
+    let res=await fetch('http://localhost:1600/signup',{
         method:'POST',
         body:JSON.stringify(form),
         headers:{
@@ -54,7 +54,7 @@ async function createAccout(){
         // document.cookie=`token=${data.token}`
         // document.cookie=`refrestoken=${data.refreshtoken}`
         // localStorage.setItem('token',data.token)
-        localStorage.setItem('email',data.email)
+        // localStorage.setItem('email',data.email)
         window.location.href='otp.html'
        
     }else{
