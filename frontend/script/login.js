@@ -9,7 +9,7 @@ async function createAccout(){
     let email=document.getElementById('email').value
     let password=document.getElementById('password').value
     let form={email,password};
-    let res=await fetch('http://localhost:1600/login',{
+    let res=await fetch('https://sore-tan-gecko-tam.cyclic.app/login',{
         method:'POST',
         body:JSON.stringify(form),
         headers:{

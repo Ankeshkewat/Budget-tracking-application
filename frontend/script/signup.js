@@ -25,7 +25,7 @@ async function createAccout(){
     let last_name=document.getElementById('last_name').value ;
     let password=document.getElementById('password').value
     let form={email,password,first_name,last_name};
-    let res=await fetch('http://localhost:1600/signup',{
+    let res=await fetch('https://sore-tan-gecko-tam.cyclic.app/signup',{
         method:'POST',
         body:JSON.stringify(form),
         headers:{
@@ -68,6 +68,7 @@ googleButton.onclick=()=>{
 }
 async function signupBygoogle(){
     
-     window.open('http://localhost:1000/auth/google');
+   const res= await window.open('http://localhost:1600/auth/google');
+  console.log(document.cookie)
    
 }

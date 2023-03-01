@@ -6,13 +6,17 @@ window.onload=()=>{
     getList()
 }
 
+if(!localStorage.getItem('token')){
+    alert('You are not authorized to use this you have to login first')
+    location.href='signup.html'
+}
 
 document.getElementById('add').onclick=()=>{
     update_cash()
  }
 
  async function getDataCat(){
-    const res=await fetch(`http://localhost:1600/shopping/cat`,{
+    const res=await fetch(`https://sore-tan-gecko-tam.cyclic.app/shopping/cat`,{
         method:"GET",
         headers:{
             'Content-Type':"application/json",
@@ -51,7 +55,7 @@ document.querySelector('#add_cash_btn button').onclick=()=>{
 async function update_cash(){
     let value=document.getElementById('cash').value;
     let form={cash:value}
-    let res=await fetch('http://localhost:1600/update',{
+    let res=await fetch('https://sore-tan-gecko-tam.cyclic.app/update',{
         method:"PATCH",
         body:JSON.stringify(form),
         headers:{
@@ -66,7 +70,7 @@ async function update_cash(){
 }
 
 async function getCash(){
-    let res=await fetch('http://localhost:1600/get/cash',{
+    let res=await fetch('https://sore-tan-gecko-tam.cyclic.app/get/cash',{
         headers:{
             "token":localStorage.getItem('token'),
         }
@@ -84,7 +88,7 @@ async function getCash(){
 
 
 async function getList(){
-    const res=await fetch('http://localhost:1600/shopping',{
+    const res=await fetch('https://sore-tan-gecko-tam.cyclic.app/shopping',{
         method:"GET",
         headers:{
             "token":localStorage.getItem('token'),

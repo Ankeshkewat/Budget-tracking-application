@@ -97,7 +97,7 @@ async function postData(){
         return alert("Please all fields")
     }
 
-     const res=await fetch('http://localhost:1600/shopping',{
+     const res=await fetch('https://sore-tan-gecko-tam.cyclic.app/shopping',{
         method:"POST",
         body:JSON.stringify(shopping_list),
         headers:{
@@ -114,7 +114,7 @@ async function postData(){
 }
 
 async function getList(){
-    const res=await fetch('http://localhost:1600/shopping',{
+    const res=await fetch('https://sore-tan-gecko-tam.cyclic.app/shopping',{
         method:"GET",
         headers:{
             'Content-Type':"application/json",

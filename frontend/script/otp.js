@@ -8,7 +8,7 @@ async function OTPFUN(){
     let form={otp}
 
        
-       let otp_res=await fetch('http://localhost:1600/verify',{
+       let otp_res=await fetch('https://sore-tan-gecko-tam.cyclic.app/verify',{
          method:"POST",
          body:JSON.stringify(form),
          headers:{
