@@ -1,5 +1,4 @@
-const express = require('express');
-const bcrypt = require('bcrypt')
+
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
@@ -11,100 +10,23 @@ const redis = new Redis({
    password: "rgE5ofgZDJnKcl81YQAxPrei0b8nphdQ",
 })
 
+const {UserModel}=require('../models/user.model')
 
-// const authanticate = (req, res, next) => {
-//    const token = req.headers?.authorization?.split(' ')[1]||req.cookies?.token;
-// //   console.log(token)
-//    if (token) {
-//         if(blacklist.includes(token)){
-//          console.log("Login again")
-//         return res.status(401).send({'msg':"Login again"})
-//         }
-//       jwt.verify(token, process.env.secret, async function (err, decoded) {
-//          if (err) {
-//             console.log(err.message);
-//             res.status(401).send({ 'msg': 'Session expired' })
-//          }
-//          else if (decoded) {
-//             console.log(decoded)
-//            const role=decoded?.role;
-//            console.log(role)
-//            req.body.userRole=role
-//             next()
-//          }
-//       })
-//    } else {
-//       res.status(401).send({ "msg": "Please login" })
-//    }
-// }
-
-
-
-const authanticate = (req, res, next) => {
-   redis.get('blacklist',(err,blacklist)=>{
-      if(err){
-         console.log(err);
-         res.send({'msg':"Something went wrong"})
-      }else{
-         redis.get('token', (err, result) => {
-            if (err) {
-               console.log(err)
-               res.status(401).send({ "msg": "You are not authorized" })
-            } else {
-               if(blacklist==result){
-               return  res.status(401).send({"msg":"PLease login again"})
-               }
-               req.headers.token=result
-               jwt.verify(result, process.env.secret, async function (err, decoded) {
-                  if (err) {
-                     console.log(err.message);
-                     res.status(401).send({ 'msg': 'Session expired' })
-                  }
-                  else if (decoded) {
-                     // console.log(decoded)
-                     next()
-                  }
-               })
-            }
-         })
-      
-      }
-   })
-  
-}
-
-
-const authanticate_login = (req, res, next) => {
-   redis.get('blacklist',(err,blacklist)=>{
-      if(err){
-         console.log(err);
-         res.send({'msg':"Something went wrong"})
-      }else{
-         redis.get('token', (err, result) => {
-            if (err) {
-               console.log(err)
-               res.status(401).send({ "msg": "You are not authorized" })
-            } else {
-               req.headers.token=result
-               jwt.verify(result, process.env.secret, async function (err, decoded) {
-                  if (err) {
-                     console.log(err.message);
-                     res.status(401).send({ 'msg': 'Session expired' })
-                  }
-                  else if (decoded) {
-                     // console.log(decoded)
-                     next()
-                  }
-               })
-            }
-         })
-      
-      }
-   })
-  
+const validate=async(req,res,next)=>{
+  let {first_name,last_name, email,password} =req.body;
+  if(!first_name||!last_name||!email||!password){
+    res.status(401).send({'msg':"Please fill all details"})
+  }else if(password.length<8){
+    res.status(401).send({'msg':'Please choose strong password'})
+  }
+  else{
+       let data=await UserModel.findOne({email});
+       if(data) return res.status(409).send({'msg':"User already exists"});
+       next()
+  }
 }
 
 
 
 
-module.exports = { authanticate ,authanticate_login}
+module.exports = {validate}

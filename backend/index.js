@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 require('dotenv').config()
 const cors = require('cors')
 const nodemailer = require('nodemailer')
-const { passport } = require('./config/google-Outh')
+const { passport } = require('./config/google-Oauth')
 const app = express();
 app.use(express.json())
 app.use(cors({
@@ -14,79 +14,34 @@ app.use(cors({
 const { connection } = require('./config/db')
 const { UserRouter } = require('./routes/user.router')
 const {ShoppingRouter}=require('./routes/shopping.router')
+const {MailRouter}=require('./routes/route _for_sending_mail')
 
-const {authanticate,authanticate_login}=require('./middlewares/athanticate')
+const {validate}=require('./middlewares/athanticate')
 
 
 app.get('/', UserRouter)
-app.post('/signup', UserRouter)
-app.post('/login',authanticate_login, UserRouter)
+app.post('/signup',validate, UserRouter)
+app.post('/login', UserRouter)
 app.post('/verify', UserRouter)
-app.get('/logout',authanticate, UserRouter)
-app.post('/shopping',authanticate,ShoppingRouter)
-app.get('/shopping',authanticate,ShoppingRouter)
-app.get('/shopping/cat',authanticate,ShoppingRouter)
-app.patch('/update',authanticate,ShoppingRouter)
-app.get('/get/cash',authanticate,ShoppingRouter)
-
-app.get('/oauth/google', (req, res) => {
-    res.send("sending email")
-})
-
-const client_ID = '87e053df6289c096000c'
-const client_secret = 'b255abe7d69b7586d9adbe343614c6744b5aae8c'
-
-const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
-
-app.get('/login/github', (req, res) => {
-    // res.sendFile(__dirname+'/frontend'+'/SignUp.html')
-    // res.sendFile(__dirname / +"frontend/index.html")
-    res.redirect('http://127.0.0.1:5500/frontend/index.html')
-
-})
-
-app.get('/auth/github', async (req, res) => {
-    const { code } = req.query
-    console.log(code)
-    const accessToken = await fetch('https://github.com/login/oauth/access_token', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json'
-        },
-        body: JSON.stringify({
-            client_id: client_ID,
-            client_secret: client_secret,
-            code
-        })
-    })
-    let data = await accessToken.json();
-    console.log(data);
-    const userDetails = await fetch('https://api.github.com/user', {
-        headers: {
-            Authorization: `Bearer ${data.access_token}`
-        }
-    })
-    const data2 = await userDetails.json();
-    console.log(data2)
-    // res.sendFile(__dirname + "/frontend/index.html")
-    res.redirect('http://127.0.0.1:5500/frontend/index.html')
-    // res.send({ "data": data2 })
-
-})
+app.post('/shopping',ShoppingRouter)
+app.get('/shopping',ShoppingRouter)
+app.get('/shopping/cat',ShoppingRouter)
+app.patch('/update',ShoppingRouter)
+app.get('/get/cash',ShoppingRouter)
+app.post('/mail',MailRouter)
 
 app.get('/auth/google',
-    passport.authenticate('google', { scope: ['profile', 'email'] }));
+  passport.authenticate('google', { scope: ['profile','email'] }));
 
-app.get('/auth/google/callback',
-    passport.authenticate('google', { failureRedirect: '/login', session: false }),
-    function (req, res) {
-        // Successful authentication, redirect home.
-        console.log(req._json)
-        // res.send({ "msg": "login successful" })
-        res.redirect('http://127.0.0.1:5500/frontend/index.html')
-        // res.sendFile('/')
-    });
+app.get('/auth/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/login',session:false}),
+  function(req, res) {
+    const token = jwt.sign({ id: req.user._id, first_name: req.user.first_name }, process.env.secret, { expiresIn: '5 days' })
+   res.cookie('token',token,{
+    httpOnly:true
+   })
+    res.status(201).send({'msg':'Login succesfull','token':token})
+});
 
 app.listen(process.env.port, async () => {
     try {
