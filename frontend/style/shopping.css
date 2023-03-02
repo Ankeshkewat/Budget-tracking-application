@@ -1,10 +1,12 @@
 #head{
-    width: 40%;
+    width: 550px;
     border: 1px solid ;
     margin: auto;
     line-height: 30px;
     text-align: center;
 }
+
+
 
 #name_div input{
     width: 100%;
@@ -48,7 +50,7 @@
     color: green;
 }
 #all{
-    width: 40%;
+    width:550px;
     margin: auto;
     margin-top: 30px;
 }
@@ -62,4 +64,10 @@
 }
 #cat{
     margin-top: 10px;
+}
+
+@media (max-width:550px){
+    #head,#all{
+        width: 100%;
+    }
 }
