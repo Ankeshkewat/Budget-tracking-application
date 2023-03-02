@@ -6,9 +6,44 @@ window.onload=()=>{
     getList()
 }
 
+let loader = () => {
+    if (document.querySelector('.spinner').style.visibility == 'visible') {
+      document.querySelector('.spinner').style.visibility = 'hidden'
+    } else {
+      document.querySelector('.spinner').style.visibility = 'visible'
+    }
+  }
+
 if(!localStorage.getItem('token')){
-    alert('You are not authorized to use this you have to login first')
+    Swal.fire({
+        title: 'You are not authorized',
+        text: "You have to login first",
+        icon: 'warning',
+        showCancelButton: false,
+        background: '#ffffff',
+        confirmButtonColor: '#C6604C',
+        cancelButtonColor: "#AAAAAA",
+    
+      })
+   setTimeout(()=>{
     location.href='signup.html'
+   },3000)
+}
+
+if(localStorage.getItem('login')){
+
+    Swal.fire({
+        title: 'Login successful',
+        text: "Now you can use all the services",
+        icon: 'success',
+        showCancelButton: false,
+        background: '#ffffff',
+        confirmButtonColor: '#C6604C',
+        cancelButtonColor: "#AAAAAA",
+    
+      })
+    localStorage.removeItem('login')
+    
 }
 
 document.getElementById('add').onclick=()=>{
@@ -53,6 +88,7 @@ document.querySelector('#add_cash_btn button').onclick=()=>{
 
 
 async function update_cash(){
+    loader()
     let value=document.getElementById('cash').value;
     let form={cash:value}
     let res=await fetch('https://sore-tan-gecko-tam.cyclic.app/update',{
@@ -64,6 +100,7 @@ async function update_cash(){
         }
     });
     let data=await res.json();
+    loader()
     alert(data.msg)
     location.reload()
 
@@ -129,50 +166,3 @@ async function getList(){
      })
     
 }
-// window.onload = () => {
-//     document.getElementById('logo').onclick = () => {
-//         console.log('clicking on');
-//         location = './index.html'
-//     }
-//     if (localStorage.getItem('token')) {
-//         document.getElementById('sign-in').innerText = JSON.parse(localStorage.getItem('first_name'))
-//         let dom = document.getElementById('navigate')
-//         let btn = document.createElement('button')
-//         // let btn = document.createElement('button')
-//         btn.innerText = 'logout'
-//         btn.style.backgroundColor = 'rgb(1, 36, 58)'
-//         btn.style.color = 'white'
-//         btn.style.border = 'none'
-//         btn.id = 'logout'
-//         btn.onmouseenter = () => {
-//             btn.style.color = '#2F71CD'
-//         }
-//         btn.onmouseleave = () => {
-//             btn.style.color = 'white'
-//         }
-//         dom.append(btn)
-//         dom.style.width = '40%'
-//     }
-//     document.getElementById('logout').onclick = () => {
-//         localStorage.removeItem('token')
-//         localStorage.removeItem('first_name')
-//         location.reload()
-//     }
-
-//     if (localStorage.getItem('firstTimeLogdin')) {
-//         Swal.fire({
-//             title: 'Hey, Good job!!',
-//             text: `You logged in successfully!!`,
-//             textColor: "white",
-//             icon: 'success',
-//             // color: 'white',
-//             // iconColor: 'white',
-//             showCancelButton: false,
-//             // background: '#202030',
-//             // confirmButtonColor: '#C6604C',
-//             confirmButtonText: 'Ok'
-//         })
-//         localStorage.removeItem('firstTimeLogdin')
-//     }
-
-// }

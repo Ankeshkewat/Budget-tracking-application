@@ -1,4 +1,5 @@
 
+
 document.getElementById('add').onclick=()=>{
     addMoreRow()
     addData()
@@ -8,9 +9,32 @@ document.getElementById('create_recodes').onclick=()=>{
     postData()
 }
 window.onload=()=>{
+    if(!localStorage.getItem('token')){
+        Swal.fire({
+            title: 'You are not authorized',
+            text: "You have to login first. redirecting you to signup page",
+            icon: 'warning',
+            showCancelButton: false,
+            background: '#ffffff',
+            confirmButtonColor: '#C6604C',
+            cancelButtonColor: "#AAAAAA",
+        
+          })
+       setTimeout(()=>{
+        location.href='signup.html'
+       },4000)
+    }
+    //************** */
     getList()
 }
 
+let loader = () => {
+    if (document.querySelector('.spinner').style.visibility == 'visible') {
+      document.querySelector('.spinner').style.visibility = 'hidden'
+    } else {
+      document.querySelector('.spinner').style.visibility = 'visible'
+    }
+  }
 let shopping_list=[];   
 
 function addMoreRow(){
@@ -74,7 +98,7 @@ function addData(){
 
    if(!title||!name||!quan||!price){
    
-    return alert('Please fill all field')
+    return alert('All input fields are mandatery')
    }else{
 
     // if(shopping_list.length==0){
@@ -96,7 +120,7 @@ async function postData(){
     if(shopping_list.length==0){
         return alert("Please all fields")
     }
-
+      loader()
      const res=await fetch('https://sore-tan-gecko-tam.cyclic.app/shopping',{
         method:"POST",
         body:JSON.stringify(shopping_list),
@@ -107,9 +131,21 @@ async function postData(){
         }
      })
      let data=await res.json();
-     alert(data.msg)
+      loader()
      if(data.msg=='List created succesfully'){
-        location.reload();
+        Swal.fire({
+            title: 'Nice Job!',
+            text: "List created succesfully",
+            icon: 'success',
+            showCancelButton: false,
+            background: '#ffffff',
+            confirmButtonColor: '#C6604C',
+            cancelButtonColor: "#AAAAAA",
+        
+          })
+       setTimeout(()=>{
+        location.reload()
+       },3000)
      }
 }
 

@@ -33,19 +33,10 @@
     }
   }
   
-  /* Optional — create your own variations! */
+
   .spinner-large {
     width: 5rem;
     height: 5rem;
     border-width: 6px;
   }
-  
-  /* .spinner-slow {
-      animation: spinner 1s linear infinite;
-    }
-    
-    .spinner-blue {
-      border-top-color: #09d;
-      border-left-color: #09d;
-    } */
   
