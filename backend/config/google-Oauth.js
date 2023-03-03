@@ -10,12 +10,12 @@ const {CashModel}=require('../models/cash.modle')
 passport.use(new GoogleStrategy({
     clientID: process.env.clientId,
     clientSecret: process.env.clientSecret,
-    callbackURL: "http://localhost:1600/auth/google/callback"
+    callbackURL: "https://sore-tan-gecko-tam.cyclic.app/auth/google/callback"
 },
     async function (accessToken, refreshToken, profile, cb) {
         const email = profile._json.email
         const isAlreadyExist = await UserModel.findOne({ email })
-        console.log(profile)
+        // console.log(profile)
 
         if (isAlreadyExist) {
             return cb(null, isAlreadyExist)
