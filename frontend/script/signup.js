@@ -16,7 +16,7 @@ function loginWithGoogle() {
         localStorage.setItem('name', name)
     }
     localStorage.removeItem('loginWithGoogle')
-
+   location.href='index.html'
 }
 
 let signUp = document.getElementById('createAcc');
