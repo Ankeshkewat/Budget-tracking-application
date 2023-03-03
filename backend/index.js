@@ -37,10 +37,7 @@ app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login',session:false}),
   function(req, res) {
     const token = jwt.sign({ id: req.user._id, first_name: req.user.first_name }, process.env.secret, { expiresIn: '5 days' })
-   res.cookie('token',token,{
-    httpOnly:true
-   })
-    res.status(201).send({'msg':'Login succesfull','token':token})
+    res.redirect(`https://wondrous-biscuit-d5ba9b.netlify.app/signup?token=${token}&name=${req.user.first_name}`)
 });
 
 app.listen(process.env.port, async () => {
