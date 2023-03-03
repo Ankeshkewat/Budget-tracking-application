@@ -1,20 +1,26 @@
 
+window.onload = () => {
 
-window.onload=()=>{
-    getDataCat()
-    getCash()
-    getList()
+    if (localStorage.getItem('token') && localStorage.getItem('name')) {
+        getDataCat()
+        getCash()
+        getList()
+    }
 }
+
+
+
+
 
 let loader = () => {
     if (document.querySelector('.spinner').style.visibility == 'visible') {
-      document.querySelector('.spinner').style.visibility = 'hidden'
+        document.querySelector('.spinner').style.visibility = 'hidden'
     } else {
-      document.querySelector('.spinner').style.visibility = 'visible'
+        document.querySelector('.spinner').style.visibility = 'visible'
     }
-  }
+}
 
-if(!localStorage.getItem('token')){
+if (!localStorage.getItem('token') && !localStorage.getItem('loginWithGoogle')) {
     Swal.fire({
         title: 'You are not authorized',
         text: "You have to login first",
@@ -23,146 +29,146 @@ if(!localStorage.getItem('token')){
         background: '#ffffff',
         confirmButtonColor: '#C6604C',
         cancelButtonColor: "#AAAAAA",
-    
-      })
-   setTimeout(()=>{
-    location.href='signup.html'
-   },3000)
+
+    })
+    setTimeout(() => {
+        location.href = 'signup.html'
+    }, 3000)
 }
 
-if(localStorage.getItem('login')){
+if (localStorage.getItem('login') && localStorage.getItem('token') && localStorage.getItem('name')) {
 
     Swal.fire({
         title: 'Login successful',
-        text: "Now you can use all the services",
+        text: "Now you can use all the features",
         icon: 'success',
         showCancelButton: false,
         background: '#ffffff',
         confirmButtonColor: '#C6604C',
         cancelButtonColor: "#AAAAAA",
-    
-      })
+
+    })
     localStorage.removeItem('login')
-    
+
 }
 
-document.getElementById('add').onclick=()=>{
+document.getElementById('add').onclick = () => {
     update_cash()
- }
+}
 
- async function getDataCat(){
-    const res=await fetch(`https://sore-tan-gecko-tam.cyclic.app/shopping/cat`,{
-        method:"GET",
-        headers:{
-            'Content-Type':"application/json",
-            "token":localStorage.getItem('token')
+async function getDataCat() {
+    const res = await fetch(`https://sore-tan-gecko-tam.cyclic.app/shopping/cat`, {
+        method: "GET",
+        headers: {
+            'Content-Type': "application/json",
+            "token": localStorage.getItem('token')
         }
-     })
-     let {msg}=await res.json();
-     console.log(msg)
-     let count=0
-     msg.forEach((el)=>{
-        let div=document.createElement('div');
-        div.className='lists_con'
-       
-        let title=document.createElement('h4');
-        title.innerText=el._id
-        let total=document.createElement('h4')
-        total.innerText='-₹'+el.total+'.00'
-        count+=(+el.total)
-        total.className='money_minus'
+    })
+    let { msg } = await res.json();
+    console.log(msg)
+    let count = 0
+    msg.forEach((el) => {
+        let div = document.createElement('div');
+        div.className = 'lists_con'
 
-        div.append(title,total)
-       
+        let title = document.createElement('h4');
+        title.innerText = el._id
+        let total = document.createElement('h4')
+        total.innerText = '-₹' + el.total + '.00'
+        count += (+el.total)
+        total.className = 'money_minus'
+
+        div.append(title, total)
+
         document.getElementById('circle').append(div)
-     })
-    document.getElementById('cash_minus').innerText="₹"+count+".00"
+    })
+    document.getElementById('cash_minus').innerText = "₹" + count + ".00"
 
 }
 
-document.querySelector('#add_cash_btn button').onclick=()=>{
-    document.getElementById('add_cash').style.display='block'
-    document.querySelector('#add_cash_btn button').style.display='none'
+document.querySelector('#add_cash_btn button').onclick = () => {
+    document.getElementById('add_cash').style.display = 'block'
+    document.querySelector('#add_cash_btn button').style.display = 'none'
 }
 
 
 
-async function update_cash(){
+async function update_cash() {
     loader()
-    let value=document.getElementById('cash').value;
-    let form={cash:value}
-    let res=await fetch('https://sore-tan-gecko-tam.cyclic.app/update',{
-        method:"PATCH",
-        body:JSON.stringify(form),
-        headers:{
-            "token":localStorage.getItem('token'),
-            'Content-type':'application/json'
+    let value = document.getElementById('cash').value;
+    let form = { cash: value }
+    let res = await fetch('https://sore-tan-gecko-tam.cyclic.app/update', {
+        method: "PATCH",
+        body: JSON.stringify(form),
+        headers: {
+            "token": localStorage.getItem('token'),
+            'Content-type': 'application/json'
         }
     });
-    let data=await res.json();
+    let data = await res.json();
     loader()
     alert(data.msg)
     location.reload()
 
 }
 
-async function getCash(){
-    let res=await fetch('https://sore-tan-gecko-tam.cyclic.app/get/cash',{
-        headers:{
-            "token":localStorage.getItem('token'),
+async function getCash() {
+    let res = await fetch('https://sore-tan-gecko-tam.cyclic.app/get/cash', {
+        headers: {
+            "token": localStorage.getItem('token'),
         }
     });
-    let {msg}=await res.json();
+    let { msg } = await res.json();
     console.log(msg)
-    if(msg=='PLease login again'|| msg=='Something went wrong'){
-    document.getElementById('cash_plus').innerText='₹'+0+'.00'
+    if (msg == 'PLease login again' || msg == 'Something went wrong') {
+        document.getElementById('cash_plus').innerText = '₹' + 0 + '.00'
 
-    }else{
-        document.getElementById('cash_plus').innerText='₹'+msg.cash+'.00'
+    } else {
+        document.getElementById('cash_plus').innerText = '₹' + msg.cash + '.00'
     }
 }
 
 
 
-async function getList(){
-    const res=await fetch('https://sore-tan-gecko-tam.cyclic.app/shopping',{
-        method:"GET",
-        headers:{
-            "token":localStorage.getItem('token'),
+async function getList() {
+    const res = await fetch('https://sore-tan-gecko-tam.cyclic.app/shopping', {
+        method: "GET",
+        headers: {
+            "token": localStorage.getItem('token'),
         }
-     })
-     let {msg}=await res.json();
-     console.log(msg)
+    })
+    let { msg } = await res.json();
+    console.log(msg)
 
-     msg.forEach((el)=>{
-        let div=document.createElement('div');
-        div.className='lists_con'
+    msg.forEach((el) => {
+        let div = document.createElement('div');
+        div.className = 'lists_con'
 
-        let div1=document.createElement('div');
-        div1.className='lists1'
+        let div1 = document.createElement('div');
+        div1.className = 'lists1'
 
-        let title=document.createElement('h4');
-        title.innerText=el._id
+        let title = document.createElement('h4');
+        title.innerText = el._id
 
-        let length=document.createElement('p');
-        length.innerText=el.count+" items"
+        let length = document.createElement('p');
+        length.innerText = el.count + " items"
 
-        div1.append(title,length)
- 
-        let div2=document.createElement('div');
-        div2.className='lists2'
-        
-        let total=document.createElement('h4');
-        total.innerText= `₹`+el.total+".00"
-        let p=document.createElement('p');
-        p.innerText="Estimated"
+        div1.append(title, length)
 
-        div2.append(total,p)
-        
-        div.append(div1,div2)
+        let div2 = document.createElement('div');
+        div2.className = 'lists2'
+
+        let total = document.createElement('h4');
+        total.innerText = `₹` + el.total + ".00"
+        let p = document.createElement('p');
+        p.innerText = "Estimated"
+
+        div2.append(total, p)
+
+        div.append(div1, div2)
 
         document.getElementById('all').append(div)
 
-     })
-    
+    })
+
 }

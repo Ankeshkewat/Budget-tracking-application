@@ -1,6 +1,23 @@
-// import { navbar } from "../component/navbar.js";
-// document.querySelector('nav').innerHTML=navbar()
 
+window.onload=()=>{
+    if(localStorage.getItem('loginWithGoogle')){
+        loginWithGoogle()
+      }
+    
+}
+function loginWithGoogle() {
+    const url = window.location.search;
+    const query = new URLSearchParams(url);
+    const token = query.get('token');
+    const name = query.get('name')
+    console.log(token, name)
+    if (token && name) {
+        localStorage.setItem('token', token)
+        localStorage.setItem('name', name)
+    }
+    localStorage.removeItem('loginWithGoogle')
+
+}
 
 let signUp = document.getElementById('createAcc');
 signUp.onclick = () => {
@@ -109,7 +126,8 @@ googleButton.onclick = () => {
 }
 async function signupBygoogle() {
 
-    const res = await window.open('http://localhost:1600/auth/google');
-    console.log(document.cookie)
+    localStorage.setItem('loginWithGoogle',true)
+    localStorage.setItem('login',true)
+   window.open('https://sore-tan-gecko-tam.cyclic.app/auth/google');
 
 }
