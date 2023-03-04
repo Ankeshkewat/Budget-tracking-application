@@ -125,9 +125,19 @@ googleButton.onclick = () => {
     signupBygoogle()
 }
 async function signupBygoogle() {
-
     localStorage.setItem('loginWithGoogle',true)
     localStorage.setItem('login',true)
    window.open('https://sore-tan-gecko-tam.cyclic.app/auth/google');
+
+}
+
+let github=document.getElementById('github')
+github.onclick=()=>{
+    signUpByGithub()
+}
+async function signUpByGithub() {
+    localStorage.setItem('loginWithGoogle',true)
+    localStorage.setItem('login',true)
+
 
 }
