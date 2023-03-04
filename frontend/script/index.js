@@ -1,4 +1,10 @@
-
+let loader = () => {
+    if (document.querySelector('.spinner').style.visibility == 'visible') {
+        document.querySelector('.spinner').style.visibility = 'hidden'
+    } else {
+        document.querySelector('.spinner').style.visibility = 'visible'
+    }
+}
 window.onload = () => {
 
     if (localStorage.getItem('token') && localStorage.getItem('name')) {
@@ -7,18 +13,10 @@ window.onload = () => {
         getList()
     }
 }
-
-
-
-
-
-let loader = () => {
-    if (document.querySelector('.spinner').style.visibility == 'visible') {
-        document.querySelector('.spinner').style.visibility = 'hidden'
-    } else {
-        document.querySelector('.spinner').style.visibility = 'visible'
-    }
+document.getElementById('add').onclick = () => {
+    update_cash()
 }
+
 
 if (!localStorage.getItem('token') && !localStorage.getItem('loginWithGoogle')) {
     Swal.fire({
@@ -52,9 +50,7 @@ if (localStorage.getItem('login') && localStorage.getItem('token') && localStora
 
 }
 
-document.getElementById('add').onclick = () => {
-    update_cash()
-}
+
 
 async function getDataCat() {
     const res = await fetch(`https://sore-tan-gecko-tam.cyclic.app/shopping/cat`, {
@@ -97,7 +93,7 @@ async function update_cash() {
     loader()
     let value = document.getElementById('cash').value;
     let form = { cash: value }
-    let res = await fetch('https://sore-tan-gecko-tam.cyclic.app/update', {
+    let res = await fetch('http://localhost:1600/update', {
         method: "PATCH",
         body: JSON.stringify(form),
         headers: {
@@ -131,6 +127,7 @@ async function getCash() {
 
 
 async function getList() {
+    loader()
     const res = await fetch('https://sore-tan-gecko-tam.cyclic.app/shopping', {
         method: "GET",
         headers: {
@@ -138,7 +135,7 @@ async function getList() {
         }
     })
     let { msg } = await res.json();
-    console.log(msg)
+    loader()
 
     msg.forEach((el) => {
         let div = document.createElement('div');
@@ -168,7 +165,6 @@ async function getList() {
         div.append(div1, div2)
 
         document.getElementById('all').append(div)
-
     })
 
 }
