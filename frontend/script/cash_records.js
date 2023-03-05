@@ -30,7 +30,7 @@ let loader = () => {
 
  async function getCash(){
     loader()
-    const res=await fetch('http://localhost:1600/get/cash/record',{
+    const res=await fetch('https://sore-tan-gecko-tam.cyclic.app/get/cash/record',{
         method:"GET",
         headers:{
             'Content-Type':"application/json",

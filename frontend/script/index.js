@@ -93,7 +93,7 @@ async function update_cash() {
     loader()
     let value = document.getElementById('cash').value;
     let form = { cash: value }
-    let res = await fetch('http://localhost:1600/update', {
+    let res = await fetch('https://sore-tan-gecko-tam.cyclic.app/update', {
         method: "PATCH",
         body: JSON.stringify(form),
         headers: {
