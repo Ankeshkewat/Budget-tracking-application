@@ -1,0 +1,30 @@
+#head{
+    width: 550px;
+    border: 1px solid ;
+    margin: auto;
+    line-height: 30px;
+    text-align: center;
+}
+
+#all{
+    width:550px;
+    margin: auto;
+    margin-top: 10px;
+}
+.lists_con{
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    /* gap: 30px; */
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 30px;
+}
+#cat{
+    margin-top: 10px;
+}
+
+@media (max-width:550px){
+    #head,#all{
+        width: 100%;
+    }
+}
