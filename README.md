@@ -1,7 +1,9 @@
 # Budget-tracking-application
 Budget and expense tracking website where users can manage their expenses and can create shopping list.
-For using this, first user has to create account.
+<br/>
 Live link:- https://wondrous-biscuit-d5ba9b.netlify.app/
+<br/>
+Base Api:- https://sore-tan-gecko-tam.cyclic.app
 ## Page implemented
 
 - Home page
