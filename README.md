@@ -32,6 +32,12 @@ Base Api:- https://sore-tan-gecko-tam.cyclic.app
 
 ![Screenshot (972)](https://user-images.githubusercontent.com/60172576/218247802-8e57295b-5b3f-48d4-958c-2d3c2548ef4f.png)
 
+## Record page
+- User can see all transactions
+
+![image](https://user-images.githubusercontent.com/60172576/223098678-1581a56a-3628-493a-8630-d453fe576a5b.png)
+
+
 
 
 
