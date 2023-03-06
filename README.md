@@ -4,6 +4,19 @@ Budget and expense tracking website where users can manage their expenses and ca
 Live link:- https://wondrous-biscuit-d5ba9b.netlify.app/
 <br/>
 Base Api:- https://sore-tan-gecko-tam.cyclic.app
+
+## Endpoints:
+ - /signup = POST
+ - /login = POST
+ - /verify = POST
+ - /shopping = POST
+ - /shopping = GET
+ - /shopping/cat = GET
+ - /update = PATCH
+ - /get/cash = GET
+ - /auth/google = google auth
+ - /login/github = github auth
+
 ## Page implemented
 
 - Home page
