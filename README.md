@@ -16,9 +16,12 @@ Base Api:- https://sore-tan-gecko-tam.cyclic.app
  - /get/cash = GET
  - /auth/google = google auth
  - /login/github = github auth
+
+
  
 ## Dependencies :
 ![image](https://user-images.githubusercontent.com/60172576/223149908-d87faf1e-b0bc-4d4b-b281-05a4b2943ef3.png)
+
 
 ## Page implemented
 
