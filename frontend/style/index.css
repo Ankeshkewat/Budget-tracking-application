@@ -93,3 +93,15 @@ color:blue;
     font-size: 15px;
     height: 25px;
 }
+#container {
+    width: 90%;
+    display: flex;
+    margin: auto;
+    text-align: center;
+    justify-content: center;
+
+}
+
+#myChart {
+    width: 100%;
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart</title>
+    <style>
+        #container {
+            width: 40%;
+            margin: auto;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            display: flex;
+            text-align: center;
+            justify-content: center;
+
+        }
+
+        #myChart {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <canvas id="myChart"></canvas>
+
+    </div>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var ctx = document.getElementById('myChart');
+    var myChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ["Groceries","Food and Drinks"],
+            datasets: [{
+                label: 'Expense you have done',
+                data: [370, 400],
+                borderWidth: 1,
+                backgroundColor:[
+                'green','blue'
+            ]
+            }],
+         
+        }
+    });
+</script>
