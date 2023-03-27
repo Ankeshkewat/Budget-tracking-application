@@ -22,6 +22,18 @@
 #cat{
     margin-top: 10px;
 }
+#container {
+    display: flex;
+    margin: auto;
+    text-align: center;
+    justify-content: center;
+    /* display: none; */
+
+}
+
+#myChart {
+    width: 100%;
+}
 
 @media (max-width:550px){
     #head,#all{

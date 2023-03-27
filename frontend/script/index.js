@@ -11,9 +11,7 @@ window.onload = () => {
         getDataCat()
         getCash()
         getList()
-        setTimeout(()=>{
-            appendChart()
-        },1200)
+      
     }
 }
 document.getElementById('add').onclick = () => {
@@ -24,7 +22,7 @@ document.getElementById('add').onclick = () => {
 if (!localStorage.getItem('token') && !localStorage.getItem('loginWithGoogle')) {
     Swal.fire({
         title: 'You are not authorized!!',
-        text: "Redirecting to sign page...",
+        text: "Redirecting to signup page...",
         icon: 'warning',
         showCancelButton: false,
         background: '#ffffff',
@@ -84,6 +82,9 @@ async function getDataCat() {
 
         document.getElementById('circle').append(div)
     })
+    appendChart()
+ document.getElementById('container').style.display='block';
+
     document.getElementById('cash_minus').innerText = "₹" + count + ".00"
 
 }
@@ -190,8 +191,7 @@ async function appendChart(){
                 data: price,
                 borderWidth: 1,
                
-            }],
-         
+            }]
         }
     })
 }

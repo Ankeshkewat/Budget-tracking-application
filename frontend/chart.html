@@ -35,18 +35,28 @@
 <script>
     var ctx = document.getElementById('myChart');
     var myChart = new Chart(ctx, {
-        type: 'doughnut',
+        type: 'line',
         data: {
-            labels: ["Groceries","Food and Drinks"],
+            labels: ["26 march", "26 march", '17 march', '28 march','28 march','28 march','28 march'],
             datasets: [{
-                label: 'Expense you have done',
-                data: [370, 400],
-                borderWidth: 1,
-                backgroundColor:[
-                'green','blue'
-            ]
+                label: 'My First Dataset',
+                data: [100, -100, 8000, -1000, -100, 1000, -4000],
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
             }],
-         
+
+        },
+        options: {
+            scales: {
+                xAxis: [
+                    {
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }
+                ]
+            }
         }
     });
 </script>
