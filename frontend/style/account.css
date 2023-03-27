@@ -1,49 +1,73 @@
-#form{
+#form {
     width: 400px;
     margin: auto;
     text-align: center;
     /* border: 1px solid red; */
     margin-top: 30px;
-    padding: 15px;
+    padding: 30px;
     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    border-radius: 5px;
+    margin-top: 30px;
 }
+
 #form input,
 #form button,
-#form select
-{
-   width: 100%;
-   box-sizing: border-box;
-   margin-top: 3%;
-   /* height: 40px; */
-   padding: 10px;
-}
-#imglogo{
+#form select {
     width: 100%;
-justify-content: space-between;
-align-items: left;
-text-align: left;
-margin-top: 20px;
+    box-sizing: border-box;
+    margin-top: 3%;
+    /* height: 40px; */
+    padding: 10px;
 }
-#imglogo img{
-    width: 10%;
+
+#imglogo {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    text-align: center;
+    margin-top: 20px;
+    column-gap: 5%;
+}
+
+#imglogo img {
+    width: 30px;
     margin-left: 10px;
 }
-input::placeholder{
+/* #github img{
+    width: 35px;
+
+} */
+input::placeholder {
     font-size: large;
 }
-#p{
+
+#p {
     text-align: left;
     border: 1px solid;
 }
-#name{
-    display:flex;
+
+#name {
+    display: flex;
     gap: 10px;
 }
-#already{
+
+#already {
     margin-top: 3%;
 }
-@media (max-width: 500px){
-    #form{
+
+h2 {
+    margin-bottom: 7%;
+}
+
+#createAcc {
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+@media (max-width: 500px) {
+    #form {
         width: 98%;
     }
 }

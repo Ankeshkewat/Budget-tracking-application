@@ -11,6 +11,7 @@ window.onload = () => {
         getDataCat()
         getCash()
         getList()
+      
     }
 }
 document.getElementById('add').onclick = () => {
@@ -20,8 +21,8 @@ document.getElementById('add').onclick = () => {
 
 if (!localStorage.getItem('token') && !localStorage.getItem('loginWithGoogle')) {
     Swal.fire({
-        title: 'You are not authorized',
-        text: "You have to login first",
+        title: 'You are not authorized!!',
+        text: "Redirecting to signup page...",
         icon: 'warning',
         showCancelButton: false,
         background: '#ffffff',
@@ -37,8 +38,8 @@ if (!localStorage.getItem('token') && !localStorage.getItem('loginWithGoogle')) 
 if (localStorage.getItem('login') && localStorage.getItem('token') && localStorage.getItem('name')) {
 
     Swal.fire({
-        title: 'Login successful',
-        text: "Now you can use all the features",
+        title: 'Login successful!!',
+        text: "Enjoy our application!",
         icon: 'success',
         showCancelButton: false,
         background: '#ffffff',
@@ -51,7 +52,8 @@ if (localStorage.getItem('login') && localStorage.getItem('token') && localStora
 }
 
 
-
+let lables=[];
+let price=[]
 async function getDataCat() {
     const res = await fetch(`https://sore-tan-gecko-tam.cyclic.app/shopping/cat`, {
         method: "GET",
@@ -69,15 +71,20 @@ async function getDataCat() {
 
         let title = document.createElement('h4');
         title.innerText = el._id
+        lables.push(el._id)
         let total = document.createElement('h4')
         total.innerText = '-₹' + el.total + '.00'
         count += (+el.total)
+        price.push(+el.total)
         total.className = 'money_minus'
 
         div.append(title, total)
 
         document.getElementById('circle').append(div)
     })
+    appendChart()
+ document.getElementById('container').style.display='block';
+
     document.getElementById('cash_minus').innerText = "₹" + count + ".00"
 
 }
@@ -167,4 +174,24 @@ async function getList() {
         document.getElementById('all').append(div)
     })
 
+}
+
+
+//append chart
+async function appendChart(){
+    var ctx = document.getElementById('myChart');
+    console.log('price is ',price)
+    console.log('lable is ',lables)
+    var myChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: lables,
+            datasets: [{
+                label: 'Expense',
+                data: price,
+                borderWidth: 1,
+               
+            }]
+        }
+    })
 }
