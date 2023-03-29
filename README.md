@@ -34,8 +34,9 @@ Base Api:- https://sore-tan-gecko-tam.cyclic.app
 - User can see all expense structure
 - Last three days records
 - Can add cash
+![image](https://user-images.githubusercontent.com/60172576/228557863-b2b90196-d551-47a0-9de6-9f71e95f555e.png)
 
-![Screenshot (968)](https://user-images.githubusercontent.com/60172576/218246842-2bc96a79-86d2-4d3a-bba3-bbd659d1e1aa.png)
+
 
 
 ## SignUP page
@@ -43,7 +44,8 @@ Base Api:- https://sore-tan-gecko-tam.cyclic.app
 - Can Login through google
 - Can Login through github
 
-![Screenshot (970)](https://user-images.githubusercontent.com/60172576/218247707-5dab5028-8625-486e-b1bb-efe257262d18.png)
+![image](https://user-images.githubusercontent.com/60172576/228558374-55c31b66-3507-49f8-b74e-3fb9dca7d1cb.png)
+
 
 ## Shopping page
 - User can see all list which already created.
@@ -52,9 +54,10 @@ Base Api:- https://sore-tan-gecko-tam.cyclic.app
 ![Screenshot (972)](https://user-images.githubusercontent.com/60172576/218247802-8e57295b-5b3f-48d4-958c-2d3c2548ef4f.png)
 
 ## Record page
-- User can see all transactions
+- User can see all transactions in the form of a chart
+![image](https://user-images.githubusercontent.com/60172576/228558651-75f11eeb-cbf5-47dd-ba69-59dc94c76e0e.png)
 
-![image](https://user-images.githubusercontent.com/60172576/223098678-1581a56a-3628-493a-8630-d453fe576a5b.png)
+
 
 
 
