@@ -82,7 +82,13 @@ async function getDataCat() {
 
         document.getElementById('circle').append(div)
     })
+   let chart= document.getElementById('myChart')
+   if(lables.length!=0&&price.length!=0){
     appendChart()
+
+   }else{
+    chart.style.display='none'
+   }
  document.getElementById('container').style.display='block';
 
     document.getElementById('cash_minus').innerText = "₹" + count + ".00"

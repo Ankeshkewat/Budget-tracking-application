@@ -23,7 +23,7 @@ const { CashModel } = require('../models/cash.modle')
 UserRouter.use(cookieParser())
 
 UserRouter.get('/', (req, res) => {
-    res.status(201).send({ "msg": "Hello from router" })
+    res.status(201).send({ "msg": "This is the base api for budget tracking website" })
 })
 
 //signup
@@ -170,4 +170,80 @@ UserRouter.get('/logout', async (req, res) => {
     redis.set('blacklist', token)
     res.send({ "msg": "Logout succesfully" })
 })
+
+
+UserRouter.post('/forget',async(req,res)=>{
+    try{
+        const {email}=req.body;
+        const data=await UserModel.findOne({email})
+        if(!data) return res.status(401).send({'msg':"Account not  found"})
+        else{
+                const token=jwt.sign({email},process.env.secret,{expiresIn:"120"})
+               const transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                        type: 'OAuth2',
+                        user: process.env.email,
+                        pass: process.env.password,
+                        clientId: process.env.clientId,
+                        clientSecret: process.env.clientSecret,
+                        refreshToken: process.env.refreshToken
+                    }
+                });
+
+                const mailConfigurations = {
+                    from: 'ankeshkewat966@gmail.com',
+                    to: email,
+                    subject: 'Password reset link',
+                    text: `https://wondrous-biscuit-d5ba9b.netlify.app/forget?token=${token}`
+                };
+
+                transporter.sendMail(mailConfigurations, async function (error, info) {
+                    if (error) {
+                        console.log('ERR: Error from nodemailer')
+
+                        console.log(error)
+                        res.status(500).send({ "msg": "Something went wrong" })
+                    } else {
+
+                        console.log('Email Sent Successfully');
+                        res.status(201).send({ "msg": `A verification link is sent to your email address` })
+
+                    }
+                })
+        }
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).send({ "msg": "Somethng went wrong" })
+
+    }
+})
+
+UserRouter.patch('/reset',async(req,res)=>{
+    try{
+        const {password,c_password,token}=req.body;
+        if(password!=c_password) return res.status(401).send({'msg':"Password did not match"});
+        else{
+            const {email}=jwt.decode(token)
+            bcrypt.hash(password,6,async(err,success)=>{
+                if (err) {
+                    console.log(err);
+                    res.status(500).send({ 'msg': "Something went wrong" })
+                }else{
+                    await UserModel.findOneAndUpdate({email},{$set:{password:success}})
+                    res.status(200).json({"msg":"Password updated"})
+                }
+            })
+        }
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).send({ "msg": "Somethng went wrong" })
+
+    }
+})
+
+
+
 module.exports = { UserRouter, redis }
