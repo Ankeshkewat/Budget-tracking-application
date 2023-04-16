@@ -90,6 +90,8 @@ async function getCash() {
         document.getElementById('all').append(div)
 
     })
+    money.reverse()
+    dateArray.reverse()
     appendChart()
     document.getElementById('myChart').style.display = 'block';
 }

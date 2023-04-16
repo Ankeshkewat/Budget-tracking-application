@@ -65,7 +65,12 @@ h2 {
     border: none;
     border-radius: 5px;
 }
-
+#forget{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;;
+    margin-top: 5px;
+}
 @media (max-width: 500px) {
     #form {
         width: 98%;

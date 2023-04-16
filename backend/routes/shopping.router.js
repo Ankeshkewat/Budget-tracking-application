@@ -7,6 +7,7 @@ require('dotenv').config()
 const ShoppingRouter=express.Router();
 const {ShoppingModel}=require('../models/shopping.model');
 const {CashModel}=require('../models/cash.modle')
+const {CashHistoryModel}=require('../models/cash_history')
 
 const { json } = require('express');
 
@@ -39,6 +40,9 @@ ShoppingRouter.post('/shopping',async(req,res)=>{
         let data3=await CashModel.findOne({user_id:id})
         let money=data3.cash
         await CashModel.updateOne({user_id:id},{$set:{"cash":money-(+total)}})
+
+        const Cash_history=new CashHistoryModel({cash:-total,user_id:id})
+        await Cash_history.save()
 
         res.status(200).send({"msg":"List created succesfully"})
     }
@@ -96,6 +100,8 @@ ShoppingRouter.patch('/update',async(req,res)=>{
         let data=await CashModel.findOne({user_id:id})
         let money=data.cash
         await CashModel.updateOne({user_id:id},{$set:{"cash":money+(+cash)}})
+        const Cash_history=new CashHistoryModel({cash:cash,user_id:id})
+        await Cash_history.save()
         res.status(200).send({"msg":"Cash updated"})
     }
     catch(err){
@@ -116,6 +122,10 @@ ShoppingRouter.get('/get/cash',async(req,res)=>{
         res.status(500).send({"msg":"Something went wrong"})
     }
 })
+
+// ShoppingRouter.post('/cash/history',async(req,res)=>{
+//      const {}=req.body
+// })
 
 
 module.exports={ShoppingRouter}
