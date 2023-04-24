@@ -22,7 +22,7 @@ document.getElementById('add').onclick = () => {
 if (!localStorage.getItem('token') && !localStorage.getItem('loginWithGoogle')) {
     Swal.fire({
         title: 'You are not authorized!!',
-        text: "Redirecting to signup page...",
+        text: "Please login",
         icon: 'warning',
         showCancelButton: false,
         background: '#ffffff',
@@ -30,9 +30,6 @@ if (!localStorage.getItem('token') && !localStorage.getItem('loginWithGoogle')) 
         cancelButtonColor: "#AAAAAA",
 
     })
-    setTimeout(() => {
-        location.href = 'signup.html'
-    }, 3000)
 }
 
 if (localStorage.getItem('login') && localStorage.getItem('token') && localStorage.getItem('name')) {

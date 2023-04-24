@@ -4,7 +4,7 @@ window.onload = () => {
     if (!localStorage.getItem('token')) {
         Swal.fire({
             title: 'You are not authorized',
-            text: "You have to login first. redirecting you to signup page",
+            text: "Please login",
             icon: 'warning',
             showCancelButton: false,
             background: '#ffffff',
@@ -12,9 +12,6 @@ window.onload = () => {
             cancelButtonColor: "#AAAAAA",
 
         })
-        setTimeout(() => {
-            location.href = 'signup.html'
-        }, 4000)
     }
     //************** */
     getCash()
